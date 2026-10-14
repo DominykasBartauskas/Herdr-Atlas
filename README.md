@@ -35,4 +35,6 @@ herdr plugin pane open --plugin sacrive.herdr-atlas --entrypoint desk
 | Close or remove a worktree | Click the action in Cleanup | `d` to close, `x` to remove |
 | Refresh or quit | — | `r`, `q` |
 
+Letter shortcuts accept lowercase or uppercase. `d` and `x` act in Cleanup, and `a` cycles only when a workspace has multiple agents.
+
 Atlas reads Herdr's local CLI and event socket, with a five-second fallback refresh. Pins are stored in Herdr's plugin state directory. Historical sessions that Herdr has already closed are outside the live agent preview.

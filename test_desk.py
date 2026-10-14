@@ -83,6 +83,18 @@ class DeskRowsTest(unittest.TestCase):
         draw_cards(screen, snapshot, rows(snapshot), 0, "", "")
         self.assertIn("billing", " ".join(value for _, value in screen.lines))
 
+    @patch("desk.curses.color_pair", return_value=0)
+    @patch("desk.status_style", return_value=0)
+    def test_footer_shows_shortcuts_for_current_mode(self, _, _color):
+        snapshot = {"workspaces": [{"workspace_id": "w1", "label": "billing"}], "agents": []}
+        screen = Screen(height=74)
+        draw_cards(screen, snapshot, rows(snapshot), 0, "", "")
+        self.assertIn("F Filter", " ".join(value for y, value in screen.lines if y == 73))
+        self.assertNotIn("D Close", " ".join(value for y, value in screen.lines if y == 73))
+        screen.lines.clear()
+        draw_cards(screen, snapshot, rows(snapshot), 0, "", "", cleanup=True)
+        self.assertIn("D Close", " ".join(value for y, value in screen.lines if y == 73))
+
     def test_mouse_targets_cards_and_detail_actions(self):
         self.assertEqual(mouse_target(74, 140, 0, 17, 1, 9, 17), ("card", 0))
         self.assertEqual(mouse_target(74, 140, 0, 17, 1, 73, 17), ("card", 1))
@@ -153,6 +165,112 @@ class DeskRowsTest(unittest.TestCase):
                 preview_block.set()
         command.assert_called_once_with("workspace", "focus", "w2")
 
+    def run_shortcuts(self, keys, answers=()):
+        snapshot = {"workspaces": [
+            {"workspace_id": "w1", "label": "first", "worktree": {"repo_key": "r", "repo_name": "alpha", "is_linked_worktree": True}},
+            {"workspace_id": "w2", "label": "second", "worktree": {"repo_key": "r", "repo_name": "alpha", "is_linked_worktree": True}},
+            {"workspace_id": "w3", "label": "third", "worktree": {"repo_key": "s", "repo_name": "zeta"}}],
+            "agents": [{"workspace_id": "w1", "pane_id": f"w1:p{i}", "agent_status": "working" if i == 1 else "idle",
+                        "name": f"agent-{i}"} for i in range(1, 5)]}
+
+        class InputScreen(Screen):
+            def __init__(self):
+                super().__init__(height=74)
+                self.keys = iter((*keys, ord("q")))
+            def keypad(self, _): pass
+            def timeout(self, _): pass
+            def getch(self): return next(self.keys)
+
+        with (patch("desk.curses.curs_set"), patch("desk.curses.has_colors", return_value=False),
+              patch("desk.curses.mousemask"), patch("desk.curses.mouseinterval"),
+              patch("desk.load_snapshot", return_value=snapshot) as load,
+              patch("desk.load_pins", return_value=set()), patch("desk.save_pins") as save,
+              patch("desk.load_closed_worktrees", return_value=[]), patch("desk.watch_events"),
+              patch("desk.fetch_preview"), patch("desk.draw_cards") as render,
+              patch("desk.ask", side_effect=list(answers)) as ask_prompt,
+              patch("desk.create_worktree", return_value="w4") as create,
+              patch("desk.cleanup_action") as cleanup_action_mock,
+              patch("desk.call") as command):
+            desk(InputScreen())
+        return snapshot, load, save, render, ask_prompt, create, cleanup_action_mock, command
+
+    def test_filter_shortcuts_accept_both_cases(self):
+        for key in ("f", "F"):
+            with self.subTest(key=key):
+                result = self.run_shortcuts((ord(key),))
+                frame = result[3].call_args_list[-1].args
+                self.assertEqual(frame[6], "active")
+                self.assertEqual([item[0]["workspace_id"] for item in frame[2]], ["w1"])
+        frame = self.run_shortcuts((ord("f"), ord("f")))[3].call_args_list[-1].args
+        self.assertEqual(frame[6], "empty")
+
+    def test_pin_fold_and_new_shortcuts(self):
+        for key in ("p", "P"):
+            with self.subTest(key=key):
+                self.run_shortcuts((ord(key),))[2].assert_called_once_with({"w1"})
+        for key in ("g", "G"):
+            with self.subTest(key=key):
+                frame = self.run_shortcuts((ord(key),))[3].call_args_list[-1].args
+                self.assertEqual([item[0]["workspace_id"] for item in frame[2]], ["group:r", "w3"])
+        for key in ("n", "N"):
+            with self.subTest(key=key):
+                result = self.run_shortcuts((ord(key),), ("feature", "main", "Feature"))
+                result[5].assert_called_once_with(result[0]["workspaces"][0], "feature", "main", "Feature")
+                self.assertEqual(result[4].call_count, 3)
+
+    def test_cleanup_shortcuts_and_context_hint(self):
+        for key, action in (("d", "close"), ("D", "close"), ("x", "remove"), ("X", "remove")):
+            with self.subTest(key=key):
+                result = self.run_shortcuts((ord("c"), ord(key)))
+                result[6].assert_called_once_with(result[3].call_args_list[-1].args[0], result[0]["workspaces"][1], action)
+        for key in ("d", "x"):
+            with self.subTest(key=key):
+                result = self.run_shortcuts((ord(key),))
+                result[6].assert_not_called()
+                self.assertIn("Press C to enter Cleanup", result[3].call_args_list[-1].args[5])
+
+    def test_contextual_shortcuts_explain_when_unavailable(self):
+        for keys, hint in (((ord("j"), ord("g")), "only one workspace"),
+                           ((ord("f"), ord("g")), "All view"),
+                           ((ord("c"), ord("f")), "return to the board"),
+                           ((ord("c"), ord("p")), "Return to the board"),
+                           ((ord("c"), ord("g")), "Return to the board"),
+                           ((ord("c"), ord("n")), "Return to the board"),
+                           ((ord("c"), ord("a")), "No agents to preview"),
+                           ((ord("c"), ord("v")), "No agent to resume"),
+                           ((ord("c"), ord("1")), "No agent 1")):
+            with self.subTest(keys=keys):
+                frame = self.run_shortcuts(keys)[3].call_args_list[-1].args
+                self.assertIn(hint, frame[5])
+
+    def test_agent_shortcuts(self):
+        for key in ("a", "A"):
+            with self.subTest(key=key):
+                frame = self.run_shortcuts((ord(key),))[3].call_args_list[-1].args
+                self.assertEqual(frame[10], "agent-2")
+        for key in ("v", "V"):
+            with self.subTest(key=key):
+                self.run_shortcuts((ord("a"), ord(key)))[7].assert_called_once_with("agent", "focus", "w1:p2")
+        for number in range(1, 5):
+            with self.subTest(number=number):
+                self.run_shortcuts((ord(str(number)),))[7].assert_called_once_with("agent", "focus", f"w1:p{number}")
+
+    def test_open_navigation_search_refresh_and_quit_shortcuts(self):
+        for keys, workspace_id in (((10,), "w1"), ((ord("l"), 10), "w2"),
+                                    ((curses.KEY_RIGHT, 10), "w2"), ((ord("j"), 10), "w3"),
+                                    ((ord("l"), ord("h"), 13), "w1"),
+                                    ((ord("j"), ord("k"), curses.KEY_ENTER), "w1"),
+                                    ((curses.KEY_RIGHT, curses.KEY_LEFT, 10), "w1"),
+                                    ((curses.KEY_DOWN, curses.KEY_UP, 10), "w1")):
+            with self.subTest(keys=keys):
+                self.run_shortcuts(keys)[7].assert_called_once_with("workspace", "focus", workspace_id)
+        frame = self.run_shortcuts((ord("/"),), ("second",))[3].call_args_list[-1].args
+        self.assertEqual([item[0]["workspace_id"] for item in frame[2]], ["w2"])
+        self.assertEqual(self.run_shortcuts((ord("R"),))[1].call_count, 2)
+        frame = self.run_shortcuts((ord("C"), ord("C")))[3].call_args_list[-1].args
+        self.assertFalse(frame[9])
+        self.assertEqual(self.run_shortcuts((ord("Q"),))[3].call_count, 1)
+
     def test_group_filter_and_pin_order(self):
         snapshot = {"workspaces": [
             {"workspace_id": "a", "label": "alpha", "worktree": {"repo_key": "r", "repo_name": "repo"}},
@@ -201,6 +319,13 @@ class DeskRowsTest(unittest.TestCase):
         workspace = {"workspace_id": "w1", "label": "old", "worktree": {"checkout_path": "/repo/old", "is_linked_worktree": True}}
         cleanup_action(None, workspace, "remove")
         command.assert_not_called()
+
+    @patch("desk.ask", return_value="CLOSE")
+    @patch("desk.call")
+    def test_cleanup_close_uses_herdr_workspace_command(self, command, _ask):
+        workspace = {"workspace_id": "w1", "label": "old", "worktree": {"checkout_path": "/repo/old", "is_linked_worktree": True}}
+        cleanup_action(None, workspace, "close")
+        command.assert_called_once_with("workspace", "close", "w1")
 
     @patch("desk.call")
     def test_closed_checkout_reopens_through_herdr(self, command):

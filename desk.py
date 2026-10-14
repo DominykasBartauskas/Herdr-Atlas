@@ -451,9 +451,10 @@ def draw_cards(screen, snapshot, items, selected, query, message, mode="all", pi
         put(screen, detail_y + 2, left + 3, "No linked checkouts without agents" if cleanup else "No workspaces match this search", content_width - 6, curses.color_pair(13))
 
     put(screen, height - 2, left, message or "", content_width, curses.color_pair(8))
-    put(screen, height - 1, 0,
-        "  Click select · Double-click open · F Filter · P Pin · G Fold · N New · C Cleanup · D Close · X Remove · A Preview · V Resume · Q Quit".ljust(width),
-        width, curses.A_REVERSE)
+    shortcuts = ("Click select · Double-click open · C Board · D Close · X Remove · Enter Open · Q Quit"
+                 if cleanup else
+                 "Click select · Double-click open · F Filter · P Pin · G Fold · N New · C Cleanup · A Next agent · V Resume · Q Quit")
+    put(screen, height - 1, 0, ("  " + shortcuts).ljust(width), width, curses.A_REVERSE)
     screen.refresh()
 
 
@@ -580,6 +581,8 @@ def desk(screen):
                            agent_label(members[preview_index % len(members)], snapshot) if members else "", view_row)
                 redraw = False
             key = screen.getch()
+            if ord("A") <= key <= ord("Z"):
+                key += ord("a") - ord("A")
             message = ""
             refresh = changed.is_set() or time.monotonic() - last_refresh >= 5
             changed.clear()
@@ -631,7 +634,10 @@ def desk(screen):
             elif ord("1") <= key <= ord("4"):
                 command, index = "agent", key - ord("1")
             elif key == ord("a"):
-                preview_index += 1
+                if len(members) > 1:
+                    preview_index += 1
+                else:
+                    message = "Only one agent to preview" if members else "No agents to preview in this workspace"
             elif key == ord("v"):
                 command = "resume"
             elif key == ord("f"):
@@ -659,9 +665,12 @@ def desk(screen):
             try:
                 if command == "attention" and index < len(attention(snapshot)):
                     call("agent", "focus", attention(snapshot)[index]["pane_id"])
-                elif command == "filter" and not cleanup:
-                    mode = ("all", "active", "empty")[index % 3]
-                    selected = 0
+                elif command == "filter":
+                    if cleanup:
+                        message = "Press C to return to the board before filtering"
+                    else:
+                        mode = ("all", "active", "empty")[index % 3]
+                        selected = 0
                 elif command == "cleanup":
                     if not cleanup:
                         closed = load_closed_worktrees(snapshot)
@@ -674,17 +683,28 @@ def desk(screen):
                         label = ask(screen, "Workspace label (optional): ")
                         selected_id = create_worktree(workspace, branch, base, label)
                         refresh = True
+                elif command == "new":
+                    message = "Return to the board and select a workspace to create a worktree"
                 elif command == "pin" and items and not cleanup and not workspace.get("collapsed_group"):
                     wid = workspace["workspace_id"]
                     pins.remove(wid) if wid in pins else pins.add(wid)
                     save_pins(pins)
+                elif command == "pin":
+                    message = "Return to the board and select a workspace to pin it"
                 elif command == "fold" and items and not cleanup:
                     group = workspace.get("collapsed_group") or repo_key(workspace)
-                    if group in collapsed:
-                        collapsed.remove(group)
+                    if mode != "all" or query:
+                        message = "Folding is available in All view without a search"
+                    elif sum(repo_key(item) == group for item in snapshot["workspaces"]) < 2:
+                        message = "This repository has only one workspace"
                     else:
-                        collapsed.add(group)
-                    selected_id = "group:" + group if group in collapsed else workspace["workspace_id"]
+                        if group in collapsed:
+                            collapsed.remove(group)
+                        else:
+                            collapsed.add(group)
+                        selected_id = "group:" + group if group in collapsed else workspace["workspace_id"]
+                elif command == "fold":
+                    message = "Return to the board to fold a repository"
                 elif command in ("open", "remove", "close") and items:
                     if workspace.get("collapsed_group"):
                         collapsed.discard(workspace["collapsed_group"])
@@ -695,10 +715,16 @@ def desk(screen):
                         refresh = True
                     elif command == "open":
                         call("workspace", "focus", workspace["workspace_id"])
+                    else:
+                        message = "Press C to enter Cleanup before closing or removing a worktree"
                 elif command == "agent" and index is not None and index < len(members):
                     call("agent", "focus", members[index]["pane_id"])
+                elif command == "agent":
+                    message = f"No agent {index + 1} in this workspace"
                 elif command == "resume" and members:
                     call("agent", "focus", members[preview_index % len(members)]["pane_id"])
+                elif command == "resume" and not members:
+                    message = "No agent to resume in this workspace"
             except (RuntimeError, ValueError, KeyError, OSError, json.JSONDecodeError) as error:
                 message = str(error)
             if refresh:
