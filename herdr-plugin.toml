@@ -1,0 +1,12 @@
+id = "sacrive.herdr-atlas"
+name = "Herdr Atlas"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "A full-screen desk for live workspaces, worktrees, and agents"
+platforms = ["macos", "linux"]
+
+[[panes]]
+id = "desk"
+title = "Herdr Atlas"
+placement = "tab"
+command = ["sh", "-c", "exec python3 \"$HERDR_PLUGIN_ROOT/desk.py\""]
