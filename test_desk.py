@@ -5,11 +5,12 @@ import json
 import threading
 import io
 import subprocess
+import curses
 from unittest.mock import patch
 
 from desk import (agent_label, attention, cleanup_action, cleanup_items, create_worktree,
-                  draw_cards, load_closed_worktrees, load_pins, load_snapshot,
-                  mouse_target, read_agent, rows, save_pins, watch_events)
+                  click_kind, desk, draw_cards, keep_visible, load_closed_worktrees, load_pins,
+                  load_snapshot, mouse_target, read_agent, rows, save_pins, watch_events)
 
 
 class Screen:
@@ -92,6 +93,65 @@ class DeskRowsTest(unittest.TestCase):
         self.assertEqual(mouse_target(74, 140, 0, 17, 1, 35, 14), ("filter", 1))
         self.assertEqual(mouse_target(74, 140, 0, 17, 1, 115, 59, cleanup=True), ("remove", None))
         self.assertEqual(mouse_target(74, 140, 0, 17, 1, 115, 67), ("resume", None))
+
+    def test_selecting_visible_card_keeps_mouse_target_stable(self):
+        view_row = 2
+        self.assertEqual(mouse_target(74, 140, 16, 17, 1, 9, 17, view_row=view_row), ("card", 4))
+        self.assertEqual(keep_visible(4, 2, 7, view_row), view_row)
+        self.assertEqual(mouse_target(74, 140, 4, 17, 1, 9, 17, view_row=view_row), ("card", 4))
+
+    def test_press_and_click_reports_count_once_but_second_press_opens(self):
+        press = (None, None, 0.0)
+        card_click = (None, 0.0)
+        kind, press, card_click = click_kind(curses.BUTTON1_PRESSED, "card", 1, 1.0, press, card_click)
+        self.assertEqual(kind, "single")
+        kind, press, card_click = click_kind(curses.BUTTON1_CLICKED, "card", 1, 1.1, press, card_click)
+        self.assertIsNone(kind)
+        kind, _, _ = click_kind(curses.BUTTON1_PRESSED, "card", 1, 1.3, press, card_click)
+        self.assertEqual(kind, "double")
+
+    def test_click_only_reports_can_double_open(self):
+        press = (None, None, 0.0)
+        card_click = (None, 0.0)
+        kind, press, card_click = click_kind(curses.BUTTON1_CLICKED, "card", 1, 1.0, press, card_click)
+        self.assertEqual(kind, "single")
+        kind, _, _ = click_kind(curses.BUTTON1_CLICKED, "card", 1, 1.3, press, card_click)
+        self.assertEqual(kind, "double")
+
+    def test_native_double_click_report_opens(self):
+        kind, _, _ = click_kind(curses.BUTTON1_DOUBLE_CLICKED | curses.BUTTON1_CLICKED, "card", 1, 1.1,
+                                ("card", 1, 1.0), (None, 0.0))
+        self.assertEqual(kind, "double")
+
+    def test_double_click_opens_even_while_preview_is_slow(self):
+        snapshot = {"workspaces": [{"workspace_id": "w1", "label": "alpha"},
+                                   {"workspace_id": "w2", "label": "beta"}],
+                    "agents": [{"workspace_id": "w1", "pane_id": "w1:p1", "agent_status": "idle"},
+                               {"workspace_id": "w2", "pane_id": "w2:p1", "agent_status": "idle"}]}
+        preview_block = threading.Event()
+
+        class InputScreen(Screen):
+            keys = iter((curses.KEY_MOUSE, curses.KEY_MOUSE, ord("q")))
+            def keypad(self, _): pass
+            def timeout(self, _): pass
+            def getch(self): return next(self.keys)
+
+        def slow_read(_):
+            preview_block.wait(1)
+            return []
+
+        with (patch("desk.curses.curs_set"), patch("desk.curses.has_colors", return_value=False),
+              patch("desk.curses.mousemask"), patch("desk.curses.mouseinterval"),
+              patch("desk.curses.getmouse", side_effect=[(0, 73, 17, 0, curses.BUTTON1_PRESSED)] * 2),
+              patch("desk.load_snapshot", return_value=snapshot), patch("desk.load_pins", return_value=set()),
+              patch("desk.watch_events"), patch("desk.draw_cards"),
+              patch("desk.read_agent", side_effect=slow_read),
+              patch("desk.call") as command):
+            try:
+                desk(InputScreen(height=74))
+            finally:
+                preview_block.set()
+        command.assert_called_once_with("workspace", "focus", "w2")
 
     def test_group_filter_and_pin_order(self):
         snapshot = {"workspaces": [

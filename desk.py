@@ -5,6 +5,7 @@ import curses
 import json
 import os
 from pathlib import Path
+import queue
 import socket
 import subprocess
 import sys
@@ -109,10 +110,18 @@ def create_worktree(workspace, branch, base="", label=""):
 
 def read_agent(pane_id):
     result = subprocess.run([HERDR, "agent", "read", pane_id, "--source", "recent", "--lines", "8"],
-                            text=True, capture_output=True, check=False)
+                            text=True, capture_output=True, check=False, timeout=3)
     if result.returncode:
         raise RuntimeError(result.stderr.strip() or "Agent read failed")
     return [line.rstrip() for line in result.stdout.splitlines() if line.strip()][-3:]
+
+
+def fetch_preview(pane_id, generation, results):
+    try:
+        lines = read_agent(pane_id)
+    except (OSError, RuntimeError, ValueError, subprocess.TimeoutExpired) as error:
+        lines = [str(error)]
+    results.put((generation, lines))
 
 
 def load_closed_worktrees(snapshot):
@@ -225,7 +234,7 @@ def surface(screen, y, x, width, height, selected=False):
             put(screen, y + line, x, "▌", 1, curses.color_pair(15))
 
 
-def geometry(height, width, selected):
+def geometry(height, width, selected, view_row=None):
     left = max(3, (width - 128) // 2)
     content_width = width - 2 * left
     columns = 2 if content_width >= 100 else 1
@@ -233,12 +242,17 @@ def geometry(height, width, selected):
     grid_y = 16 if height >= 50 else 12
     detail_y = height - (16 if height >= 50 else 12)
     visible_rows = max(1, (detail_y - grid_y) // 6)
-    scroll_row = max(0, selected // columns - visible_rows + 1)
+    scroll_row = max(0, selected // columns - visible_rows + 1) if view_row is None else view_row
     return left, content_width, columns, card_width, grid_y, visible_rows, scroll_row, detail_y
 
 
-def mouse_target(height, width, selected, item_count, member_count, x, y, attention_count=0, cleanup=False):
-    left, content_width, columns, card_width, grid_y, visible_rows, scroll_row, detail_y = geometry(height, width, selected)
+def keep_visible(selected, columns, visible_rows, view_row):
+    row = selected // columns
+    return row if row < view_row else row - visible_rows + 1 if row >= view_row + visible_rows else view_row
+
+
+def mouse_target(height, width, selected, item_count, member_count, x, y, attention_count=0, cleanup=False, view_row=None):
+    left, content_width, columns, card_width, grid_y, visible_rows, scroll_row, detail_y = geometry(height, width, selected, view_row)
     if height >= 50 and 10 <= y <= 11 and left <= x < left + content_width:
         index = (y - 10) * 2 + (x >= left + content_width // 2)
         if index < attention_count:
@@ -274,7 +288,25 @@ def mouse_target(height, width, selected, item_count, member_count, x, y, attent
     return None, None
 
 
-def draw_cards(screen, snapshot, items, selected, query, message, mode="all", pins=None, preview=None, cleanup=False, preview_name=""):
+def click_kind(state, target, index, now, last_press, last_card_click):
+    """Treat press+click reports as one click, and two card clicks as an open."""
+    pressed = bool(state & curses.BUTTON1_PRESSED)
+    clicked = bool(state & curses.BUTTON1_CLICKED)
+    doubled = bool(state & curses.BUTTON1_DOUBLE_CLICKED)
+    if not (pressed or clicked or doubled):
+        return None, last_press, last_card_click
+    if pressed:
+        last_press = (target, index, now)
+    elif clicked and not doubled and last_press[:2] == (target, index) and now - last_press[2] < 0.4:
+        return None, last_press, last_card_click
+    if target != "card":
+        return "single", last_press, (None, 0.0)
+    if doubled or (last_card_click[0] == index and now - last_card_click[1] < 0.7):
+        return "double", last_press, (None, 0.0)
+    return "single", last_press, (index, now)
+
+
+def draw_cards(screen, snapshot, items, selected, query, message, mode="all", pins=None, preview=None, cleanup=False, preview_name="", view_row=None):
     screen.erase()
     height, width = screen.getmaxyx()
     if height < 30 or width < 48:
@@ -282,7 +314,7 @@ def draw_cards(screen, snapshot, items, selected, query, message, mode="all", pi
         screen.refresh()
         return
 
-    left, content_width, columns, card_width, grid_y, visible_rows, scroll_row, detail_y = geometry(height, width, selected)
+    left, content_width, columns, card_width, grid_y, visible_rows, scroll_row, detail_y = geometry(height, width, selected, view_row)
     agents = snapshot.get("agents", [])
     counts = {state: sum(a.get("agent_status") == state for a in agents) for state in PRIORITY}
     put(screen, 1, left, "◆  HERDR", 18, curses.color_pair(6) | curses.A_BOLD)
@@ -508,28 +540,44 @@ def desk(screen):
     pins = load_pins()
     collapsed = set()
     selected = 0
+    view_row = 0
     preview_id = None
     preview_lines = []
+    preview_generation = 0
+    preview_results = queue.SimpleQueue()
     preview_index = 0
     message = ""
-    last_card_press = (None, 0.0)
+    last_card_click = (None, 0.0)
     last_mouse_press = (None, None, 0.0)
     redraw = True
     try:
         while True:
+            try:
+                while True:
+                    generation, lines = preview_results.get_nowait()
+                    if generation == preview_generation:
+                        preview_lines = lines
+                        redraw = True
+            except queue.Empty:
+                pass
             items = cleanup_items(snapshot, closed) if cleanup else rows(snapshot, query, mode, pins, collapsed)
             selected = min(selected, max(0, len(items) - 1))
+            screen_height, screen_width = screen.getmaxyx()
+            layout = geometry(screen_height, screen_width, selected, view_row)
+            columns, visible_rows = layout[2], layout[5]
+            view_row = keep_visible(selected, columns, visible_rows, view_row)
             workspace, members = items[selected] if items else ({}, [])
             pane_id = members[preview_index % len(members)]["pane_id"] if members else None
             if pane_id != preview_id:
                 preview_id = pane_id
-                try:
-                    preview_lines = read_agent(pane_id) if pane_id else []
-                except (RuntimeError, ValueError, json.JSONDecodeError) as error:
-                    preview_lines = [str(error)]
+                preview_lines = []
+                preview_generation += 1
+                if pane_id:
+                    threading.Thread(target=fetch_preview, args=(pane_id, preview_generation, preview_results), daemon=True).start()
+                redraw = True
             if redraw:
                 draw_cards(screen, snapshot, items, selected, query, message, mode, pins, preview_lines, cleanup,
-                           agent_label(members[preview_index % len(members)], snapshot) if members else "")
+                           agent_label(members[preview_index % len(members)], snapshot) if members else "", view_row)
                 redraw = False
             key = screen.getch()
             message = ""
@@ -540,8 +588,6 @@ def desk(screen):
             if key in (ord("q"), 27):
                 return
             redraw = True
-            screen_height, screen_width = screen.getmaxyx()
-            columns = geometry(screen_height, screen_width, selected)[2]
             command, index = None, None
             if key == curses.KEY_MOUSE:
                 try:
@@ -559,25 +605,19 @@ def desk(screen):
                     continue
                 if state & (curses.BUTTON1_PRESSED | curses.BUTTON1_CLICKED | curses.BUTTON1_DOUBLE_CLICKED):
                     target, index = mouse_target(screen_height, screen_width, selected, len(items), len(members), x, y,
-                                                 len(attention(snapshot)), cleanup)
-                    pressed = bool(state & curses.BUTTON1_PRESSED)
-                    now = time.monotonic()
-                    if pressed:
-                        last_mouse_press = (target, index, now)
-                    elif state & curses.BUTTON1_CLICKED and last_mouse_press[:2] == (target, index) and now - last_mouse_press[2] < 0.4:
-                        continue
-                    if target == "card":
-                        selected = index
-                        card = items[index][0]
-                        if card.get("collapsed_group"):
-                            command = "fold"
-                        elif state & curses.BUTTON1_DOUBLE_CLICKED or (pressed and last_card_press[0] == index and now - last_card_press[1] < 0.4):
-                            command = "open"
-                        if pressed:
-                            last_card_press = (index, now)
-                    else:
-                        command = target
-                        last_card_press = (None, 0.0)
+                                                 len(attention(snapshot)), cleanup, view_row)
+                    kind, last_mouse_press, last_card_click = click_kind(
+                        state, target, index, time.monotonic(), last_mouse_press, last_card_click)
+                    if kind:
+                        if target == "card":
+                            selected = index
+                            card = items[index][0]
+                            if card.get("collapsed_group"):
+                                command = "fold"
+                            elif kind == "double":
+                                command = "open"
+                        else:
+                            command = target
             elif key in (curses.KEY_DOWN, ord("j")):
                 selected = min(selected + columns, max(0, len(items) - 1))
             elif key in (curses.KEY_UP, ord("k")):
@@ -673,6 +713,7 @@ def desk(screen):
             updated = cleanup_items(snapshot, closed) if cleanup else rows(snapshot, query, mode, pins, collapsed)
             selected = next((i for i, item in enumerate(updated) if item[0]["workspace_id"] == selected_id),
                             min(selected, max(0, len(updated) - 1)))
+            view_row = keep_visible(selected, columns, visible_rows, view_row)
     finally:
         stopped.set()
 
