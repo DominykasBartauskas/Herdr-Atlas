@@ -286,7 +286,7 @@ def draw_cards(screen, snapshot, items, selected, query, message, mode="all", pi
     agents = snapshot.get("agents", [])
     counts = {state: sum(a.get("agent_status") == state for a in agents) for state in PRIORITY}
     put(screen, 1, left, "◆  HERDR", 18, curses.color_pair(6) | curses.A_BOLD)
-    put(screen, 1, left + 17, "Control center", 24, curses.A_BOLD)
+    put(screen, 1, left + 17, "Atlas", 24, curses.A_BOLD)
     if width >= 70:
         put(screen, 1, left + content_width - 17, "●  LIVE SESSION", 16, curses.color_pair(3))
     put(screen, 2, left, "A clear view of everything in motion.", content_width, curses.color_pair(7))

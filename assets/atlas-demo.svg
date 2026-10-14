@@ -1,0 +1,319 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1308" height="1302" viewBox="0 0 1308 1302">
+<title>Herdr Atlas demo with fictional workspaces and agents</title>
+<rect width="100%" height="100%" rx="14" fill="#1f1f1f"/>
+<text x="78" y="57" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="72" lengthAdjust="spacing">◆  HERDR</text>
+<text x="231" y="57" fill="#e6e6e6" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="45" lengthAdjust="spacing">Atlas</text>
+<text x="1077" y="57" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="135" lengthAdjust="spacing">●  LIVE SESSION</text>
+<text x="78" y="76" fill="#a8a8a8" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="333" lengthAdjust="spacing">A clear view of everything in motion.</text>
+<rect x="78" y="119" width="279" height="19" fill="#303030"/>
+<rect x="366" y="119" width="279" height="19" fill="#303030"/>
+<rect x="654" y="119" width="279" height="19" fill="#303030"/>
+<rect x="942" y="119" width="279" height="19" fill="#303030"/>
+<rect x="78" y="138" width="18" height="19" fill="#303030"/>
+<rect x="96" y="138" width="18" height="19" fill="#303030"/>
+<text x="96" y="152" fill="#ff5f5f" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="18" lengthAdjust="spacing">01</text>
+<rect x="114" y="138" width="243" height="19" fill="#303030"/>
+<rect x="366" y="138" width="18" height="19" fill="#303030"/>
+<rect x="384" y="138" width="18" height="19" fill="#303030"/>
+<text x="384" y="152" fill="#87d787" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="18" lengthAdjust="spacing">01</text>
+<rect x="402" y="138" width="243" height="19" fill="#303030"/>
+<rect x="654" y="138" width="18" height="19" fill="#303030"/>
+<rect x="672" y="138" width="18" height="19" fill="#303030"/>
+<text x="672" y="152" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="18" lengthAdjust="spacing">02</text>
+<rect x="690" y="138" width="243" height="19" fill="#303030"/>
+<rect x="942" y="138" width="18" height="19" fill="#303030"/>
+<rect x="960" y="138" width="18" height="19" fill="#303030"/>
+<text x="960" y="152" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="18" lengthAdjust="spacing">10</text>
+<rect x="978" y="138" width="243" height="19" fill="#303030"/>
+<rect x="78" y="157" width="18" height="19" fill="#303030"/>
+<rect x="96" y="157" width="81" height="19" fill="#303030"/>
+<text x="96" y="171" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="81" lengthAdjust="spacing">NEEDS YOU</text>
+<rect x="177" y="157" width="180" height="19" fill="#303030"/>
+<rect x="366" y="157" width="18" height="19" fill="#303030"/>
+<rect x="384" y="157" width="72" height="19" fill="#303030"/>
+<text x="384" y="171" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="72" lengthAdjust="spacing">FINISHED</text>
+<rect x="456" y="157" width="189" height="19" fill="#303030"/>
+<rect x="654" y="157" width="18" height="19" fill="#303030"/>
+<rect x="672" y="157" width="63" height="19" fill="#303030"/>
+<text x="672" y="171" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="63" lengthAdjust="spacing">WORKING</text>
+<rect x="735" y="157" width="198" height="19" fill="#303030"/>
+<rect x="942" y="157" width="18" height="19" fill="#303030"/>
+<rect x="960" y="157" width="90" height="19" fill="#303030"/>
+<text x="960" y="171" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="90" lengthAdjust="spacing">WORKSPACES</text>
+<rect x="1050" y="157" width="171" height="19" fill="#303030"/>
+<rect x="78" y="176" width="279" height="19" fill="#303030"/>
+<rect x="366" y="176" width="279" height="19" fill="#303030"/>
+<rect x="654" y="176" width="279" height="19" fill="#303030"/>
+<rect x="942" y="176" width="279" height="19" fill="#303030"/>
+<text x="78" y="209" fill="#ff5f5f" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="108" lengthAdjust="spacing">ATTENTION  2</text>
+<rect x="78" y="214" width="288" height="19" fill="#303030"/>
+<text x="78" y="228" fill="#ff5f5f" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="288" lengthAdjust="spacing">● NEEDS YOU  Review API response</text>
+<rect x="654" y="214" width="279" height="19" fill="#303030"/>
+<text x="654" y="228" fill="#87d787" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="279" lengthAdjust="spacing">✓ FINISHED  Draft release notes</text>
+<text x="78" y="304" fill="#e6e6e6" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="135" lengthAdjust="spacing">WORKSPACE BOARD</text>
+<text x="276" y="304" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="27" lengthAdjust="spacing">ALL</text>
+<text x="303" y="304" fill="#a8a8a8" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="162" lengthAdjust="spacing">  ACTIVE  NO AGENT</text>
+<text x="1023" y="304" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="45" lengthAdjust="spacing">+ NEW</text>
+<text x="1122" y="304" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="63" lengthAdjust="spacing">CLEANUP</text>
+<rect x="78" y="328" width="9" height="19" fill="#444444"/>
+<text x="78" y="342" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="328" width="558" height="19" fill="#444444"/>
+<rect x="654" y="328" width="567" height="19" fill="#303030"/>
+<rect x="78" y="347" width="9" height="19" fill="#444444"/>
+<text x="78" y="361" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="347" width="18" height="19" fill="#444444"/>
+<rect x="105" y="347" width="99" height="19" fill="#444444"/>
+<text x="105" y="361" fill="#ff5f5f" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="99" lengthAdjust="spacing">● NEEDS YOU</text>
+<rect x="204" y="347" width="27" height="19" fill="#444444"/>
+<rect x="231" y="347" width="135" height="19" fill="#444444"/>
+<text x="231" y="361" fill="#eeeeee" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="135" lengthAdjust="spacing">review-endpoint</text>
+<rect x="366" y="347" width="279" height="19" fill="#444444"/>
+<rect x="654" y="347" width="27" height="19" fill="#303030"/>
+<rect x="681" y="347" width="81" height="19" fill="#303030"/>
+<text x="681" y="361" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="81" lengthAdjust="spacing">● WORKING</text>
+<rect x="762" y="347" width="45" height="19" fill="#303030"/>
+<rect x="807" y="347" width="99" height="19" fill="#303030"/>
+<text x="807" y="361" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="99" lengthAdjust="spacing">cache-layer</text>
+<rect x="906" y="347" width="315" height="19" fill="#303030"/>
+<rect x="78" y="366" width="9" height="19" fill="#444444"/>
+<text x="78" y="380" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="366" width="18" height="19" fill="#444444"/>
+<rect x="105" y="366" width="189" height="19" fill="#444444"/>
+<text x="105" y="380" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="189" lengthAdjust="spacing">demo-api  ·  worktree</text>
+<rect x="294" y="366" width="351" height="19" fill="#444444"/>
+<rect x="654" y="366" width="27" height="19" fill="#303030"/>
+<rect x="681" y="366" width="189" height="19" fill="#303030"/>
+<text x="681" y="380" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="189" lengthAdjust="spacing">demo-api  ·  worktree</text>
+<rect x="870" y="366" width="351" height="19" fill="#303030"/>
+<rect x="78" y="385" width="9" height="19" fill="#444444"/>
+<text x="78" y="399" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="385" width="18" height="19" fill="#444444"/>
+<rect x="105" y="385" width="279" height="19" fill="#444444"/>
+<text x="105" y="399" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="279" lengthAdjust="spacing">1 agent  ·  Review API response</text>
+<rect x="384" y="385" width="261" height="19" fill="#444444"/>
+<rect x="654" y="385" width="27" height="19" fill="#303030"/>
+<rect x="681" y="385" width="270" height="19" fill="#303030"/>
+<text x="681" y="399" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="270" lengthAdjust="spacing">1 agent  ·  Add response cache</text>
+<rect x="951" y="385" width="270" height="19" fill="#303030"/>
+<rect x="78" y="404" width="9" height="19" fill="#444444"/>
+<text x="78" y="418" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="404" width="558" height="19" fill="#444444"/>
+<rect x="654" y="404" width="567" height="19" fill="#303030"/>
+<rect x="78" y="442" width="567" height="19" fill="#303030"/>
+<rect x="654" y="442" width="567" height="19" fill="#303030"/>
+<rect x="78" y="461" width="27" height="19" fill="#303030"/>
+<rect x="105" y="461" width="54" height="19" fill="#303030"/>
+<text x="105" y="475" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="54" lengthAdjust="spacing">○ IDLE</text>
+<rect x="159" y="461" width="72" height="19" fill="#303030"/>
+<rect x="231" y="461" width="108" height="19" fill="#303030"/>
+<text x="231" y="475" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="108" lengthAdjust="spacing">auth-cleanup</text>
+<rect x="339" y="461" width="306" height="19" fill="#303030"/>
+<rect x="654" y="461" width="27" height="19" fill="#303030"/>
+<rect x="681" y="461" width="90" height="19" fill="#303030"/>
+<text x="681" y="475" fill="#d787ff" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="90" lengthAdjust="spacing">· NO AGENT</text>
+<rect x="771" y="461" width="36" height="19" fill="#303030"/>
+<rect x="807" y="461" width="72" height="19" fill="#303030"/>
+<text x="807" y="475" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="72" lengthAdjust="spacing">API home</text>
+<rect x="879" y="461" width="342" height="19" fill="#303030"/>
+<rect x="78" y="480" width="27" height="19" fill="#303030"/>
+<rect x="105" y="480" width="189" height="19" fill="#303030"/>
+<text x="105" y="494" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="189" lengthAdjust="spacing">demo-api  ·  worktree</text>
+<rect x="294" y="480" width="351" height="19" fill="#303030"/>
+<rect x="654" y="480" width="27" height="19" fill="#303030"/>
+<rect x="681" y="480" width="180" height="19" fill="#303030"/>
+<text x="681" y="494" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="180" lengthAdjust="spacing">demo-api  ·  project</text>
+<rect x="861" y="480" width="360" height="19" fill="#303030"/>
+<rect x="78" y="499" width="27" height="19" fill="#303030"/>
+<rect x="105" y="499" width="234" height="19" fill="#303030"/>
+<text x="105" y="513" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="234" lengthAdjust="spacing">1 agent  ·  Tidy auth flow</text>
+<rect x="339" y="499" width="306" height="19" fill="#303030"/>
+<rect x="654" y="499" width="27" height="19" fill="#303030"/>
+<rect x="681" y="499" width="72" height="19" fill="#303030"/>
+<text x="681" y="513" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="72" lengthAdjust="spacing">0 agents</text>
+<rect x="753" y="499" width="468" height="19" fill="#303030"/>
+<rect x="78" y="518" width="567" height="19" fill="#303030"/>
+<rect x="654" y="518" width="567" height="19" fill="#303030"/>
+<rect x="78" y="556" width="567" height="19" fill="#303030"/>
+<rect x="654" y="556" width="567" height="19" fill="#303030"/>
+<rect x="78" y="575" width="27" height="19" fill="#303030"/>
+<rect x="105" y="575" width="90" height="19" fill="#303030"/>
+<text x="105" y="589" fill="#87d787" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="90" lengthAdjust="spacing">✓ FINISHED</text>
+<rect x="195" y="575" width="36" height="19" fill="#303030"/>
+<rect x="231" y="575" width="117" height="19" fill="#303030"/>
+<text x="231" y="589" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="117" lengthAdjust="spacing">release-notes</text>
+<rect x="348" y="575" width="297" height="19" fill="#303030"/>
+<rect x="654" y="575" width="27" height="19" fill="#303030"/>
+<rect x="681" y="575" width="81" height="19" fill="#303030"/>
+<text x="681" y="589" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="81" lengthAdjust="spacing">● WORKING</text>
+<rect x="762" y="575" width="45" height="19" fill="#303030"/>
+<rect x="807" y="575" width="90" height="19" fill="#303030"/>
+<text x="807" y="589" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="90" lengthAdjust="spacing">quickstart</text>
+<rect x="897" y="575" width="324" height="19" fill="#303030"/>
+<rect x="78" y="594" width="27" height="19" fill="#303030"/>
+<rect x="105" y="594" width="198" height="19" fill="#303030"/>
+<text x="105" y="608" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="198" lengthAdjust="spacing">demo-docs  ·  worktree</text>
+<rect x="303" y="594" width="342" height="19" fill="#303030"/>
+<rect x="654" y="594" width="27" height="19" fill="#303030"/>
+<rect x="681" y="594" width="198" height="19" fill="#303030"/>
+<text x="681" y="608" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="198" lengthAdjust="spacing">demo-docs  ·  worktree</text>
+<rect x="879" y="594" width="342" height="19" fill="#303030"/>
+<rect x="78" y="613" width="27" height="19" fill="#303030"/>
+<rect x="105" y="613" width="279" height="19" fill="#303030"/>
+<text x="105" y="627" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="279" lengthAdjust="spacing">1 agent  ·  Draft release notes</text>
+<rect x="384" y="613" width="261" height="19" fill="#303030"/>
+<rect x="654" y="613" width="27" height="19" fill="#303030"/>
+<rect x="681" y="613" width="270" height="19" fill="#303030"/>
+<text x="681" y="627" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="270" lengthAdjust="spacing">1 agent  ·  Refresh quickstart</text>
+<rect x="951" y="613" width="270" height="19" fill="#303030"/>
+<rect x="78" y="632" width="567" height="19" fill="#303030"/>
+<rect x="654" y="632" width="567" height="19" fill="#303030"/>
+<rect x="78" y="670" width="567" height="19" fill="#303030"/>
+<rect x="654" y="670" width="567" height="19" fill="#303030"/>
+<rect x="78" y="689" width="27" height="19" fill="#303030"/>
+<rect x="105" y="689" width="54" height="19" fill="#303030"/>
+<text x="105" y="703" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="54" lengthAdjust="spacing">○ IDLE</text>
+<rect x="159" y="689" width="72" height="19" fill="#303030"/>
+<rect x="231" y="689" width="81" height="19" fill="#303030"/>
+<text x="231" y="703" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="81" lengthAdjust="spacing">Docs home</text>
+<rect x="312" y="689" width="333" height="19" fill="#303030"/>
+<rect x="654" y="689" width="27" height="19" fill="#303030"/>
+<rect x="681" y="689" width="54" height="19" fill="#303030"/>
+<text x="681" y="703" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="54" lengthAdjust="spacing">○ IDLE</text>
+<rect x="735" y="689" width="72" height="19" fill="#303030"/>
+<rect x="807" y="689" width="108" height="19" fill="#303030"/>
+<text x="807" y="703" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="108" lengthAdjust="spacing">search-panel</text>
+<rect x="915" y="689" width="306" height="19" fill="#303030"/>
+<rect x="78" y="708" width="27" height="19" fill="#303030"/>
+<rect x="105" y="708" width="189" height="19" fill="#303030"/>
+<text x="105" y="722" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="189" lengthAdjust="spacing">demo-docs  ·  project</text>
+<rect x="294" y="708" width="351" height="19" fill="#303030"/>
+<rect x="654" y="708" width="27" height="19" fill="#303030"/>
+<rect x="681" y="708" width="180" height="19" fill="#303030"/>
+<text x="681" y="722" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="180" lengthAdjust="spacing">demo-ui  ·  worktree</text>
+<rect x="861" y="708" width="360" height="19" fill="#303030"/>
+<rect x="78" y="727" width="27" height="19" fill="#303030"/>
+<rect x="105" y="727" width="243" height="19" fill="#303030"/>
+<text x="105" y="741" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="243" lengthAdjust="spacing">1 agent  ·  Organize guides</text>
+<rect x="348" y="727" width="297" height="19" fill="#303030"/>
+<rect x="654" y="727" width="27" height="19" fill="#303030"/>
+<rect x="681" y="727" width="279" height="19" fill="#303030"/>
+<text x="681" y="741" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="279" lengthAdjust="spacing">1 agent  ·  Polish search panel</text>
+<rect x="960" y="727" width="261" height="19" fill="#303030"/>
+<rect x="78" y="746" width="567" height="19" fill="#303030"/>
+<rect x="654" y="746" width="567" height="19" fill="#303030"/>
+<rect x="78" y="784" width="567" height="19" fill="#303030"/>
+<rect x="654" y="784" width="567" height="19" fill="#303030"/>
+<rect x="78" y="803" width="27" height="19" fill="#303030"/>
+<rect x="105" y="803" width="54" height="19" fill="#303030"/>
+<text x="105" y="817" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="54" lengthAdjust="spacing">○ IDLE</text>
+<rect x="159" y="803" width="72" height="19" fill="#303030"/>
+<rect x="231" y="803" width="108" height="19" fill="#303030"/>
+<text x="231" y="817" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="108" lengthAdjust="spacing">color-tokens</text>
+<rect x="339" y="803" width="306" height="19" fill="#303030"/>
+<rect x="654" y="803" width="27" height="19" fill="#303030"/>
+<rect x="681" y="803" width="90" height="19" fill="#303030"/>
+<text x="681" y="817" fill="#d787ff" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="90" lengthAdjust="spacing">· NO AGENT</text>
+<rect x="771" y="803" width="36" height="19" fill="#303030"/>
+<rect x="807" y="803" width="63" height="19" fill="#303030"/>
+<text x="807" y="817" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="63" lengthAdjust="spacing">UI home</text>
+<rect x="870" y="803" width="351" height="19" fill="#303030"/>
+<rect x="78" y="822" width="27" height="19" fill="#303030"/>
+<rect x="105" y="822" width="180" height="19" fill="#303030"/>
+<text x="105" y="836" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="180" lengthAdjust="spacing">demo-ui  ·  worktree</text>
+<rect x="285" y="822" width="360" height="19" fill="#303030"/>
+<rect x="654" y="822" width="27" height="19" fill="#303030"/>
+<rect x="681" y="822" width="171" height="19" fill="#303030"/>
+<text x="681" y="836" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="171" lengthAdjust="spacing">demo-ui  ·  project</text>
+<rect x="852" y="822" width="369" height="19" fill="#303030"/>
+<rect x="78" y="841" width="27" height="19" fill="#303030"/>
+<rect x="105" y="841" width="279" height="19" fill="#303030"/>
+<text x="105" y="855" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="279" lengthAdjust="spacing">1 agent  ·  Update color tokens</text>
+<rect x="384" y="841" width="261" height="19" fill="#303030"/>
+<rect x="654" y="841" width="27" height="19" fill="#303030"/>
+<rect x="681" y="841" width="72" height="19" fill="#303030"/>
+<text x="681" y="855" fill="#9e9e9e" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="72" lengthAdjust="spacing">0 agents</text>
+<rect x="753" y="841" width="468" height="19" fill="#303030"/>
+<rect x="78" y="860" width="567" height="19" fill="#303030"/>
+<rect x="654" y="860" width="567" height="19" fill="#303030"/>
+<rect x="78" y="974" width="9" height="19" fill="#444444"/>
+<text x="78" y="988" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="974" width="1143" height="19" fill="#444444"/>
+<rect x="78" y="993" width="9" height="19" fill="#444444"/>
+<text x="78" y="1007" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="993" width="18" height="19" fill="#444444"/>
+<rect x="105" y="993" width="72" height="19" fill="#444444"/>
+<text x="105" y="1007" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="72" lengthAdjust="spacing">SELECTED</text>
+<rect x="177" y="993" width="36" height="19" fill="#444444"/>
+<rect x="213" y="993" width="135" height="19" fill="#444444"/>
+<text x="213" y="1007" fill="#eeeeee" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="135" lengthAdjust="spacing">review-endpoint</text>
+<rect x="348" y="993" width="567" height="19" fill="#444444"/>
+<rect x="915" y="993" width="45" height="19" fill="#444444"/>
+<text x="915" y="1007" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="45" lengthAdjust="spacing">☆ PIN</text>
+<rect x="960" y="993" width="81" height="19" fill="#444444"/>
+<rect x="1041" y="993" width="144" height="19" fill="#444444"/>
+<text x="1041" y="1007" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="144" lengthAdjust="spacing">↗ OPEN WORKSPACE</text>
+<rect x="1185" y="993" width="45" height="19" fill="#444444"/>
+<rect x="78" y="1012" width="9" height="19" fill="#444444"/>
+<text x="78" y="1026" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="1012" width="18" height="19" fill="#444444"/>
+<rect x="105" y="1012" width="261" height="19" fill="#444444"/>
+<text x="105" y="1026" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="261" lengthAdjust="spacing">demo-api  ·  1 tab  ·  1 pane</text>
+<rect x="366" y="1012" width="864" height="19" fill="#444444"/>
+<rect x="78" y="1031" width="9" height="19" fill="#444444"/>
+<text x="78" y="1045" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="1031" width="18" height="19" fill="#444444"/>
+<rect x="105" y="1031" width="360" height="19" fill="#444444"/>
+<text x="105" y="1045" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="360" lengthAdjust="spacing">/demo/worktrees/demo-api/review-endpoint</text>
+<rect x="465" y="1031" width="765" height="19" fill="#444444"/>
+<rect x="78" y="1050" width="9" height="19" fill="#444444"/>
+<text x="78" y="1064" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="1050" width="1143" height="19" fill="#444444"/>
+<rect x="78" y="1069" width="9" height="19" fill="#444444"/>
+<text x="78" y="1083" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="1069" width="18" height="19" fill="#444444"/>
+<rect x="105" y="1069" width="54" height="19" fill="#444444"/>
+<text x="105" y="1083" fill="#eeeeee" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="54" lengthAdjust="spacing">AGENTS</text>
+<rect x="159" y="1069" width="1071" height="19" fill="#444444"/>
+<rect x="78" y="1088" width="9" height="19" fill="#444444"/>
+<text x="78" y="1102" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="1088" width="18" height="19" fill="#444444"/>
+<rect x="105" y="1088" width="288" height="19" fill="#444444"/>
+<text x="105" y="1102" fill="#ff5f5f" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="288" lengthAdjust="spacing">1  BLOCKED   Review API response</text>
+<rect x="393" y="1088" width="837" height="19" fill="#444444"/>
+<rect x="78" y="1107" width="9" height="19" fill="#444444"/>
+<text x="78" y="1121" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="1107" width="1143" height="19" fill="#444444"/>
+<rect x="78" y="1126" width="9" height="19" fill="#444444"/>
+<text x="78" y="1140" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="1126" width="1143" height="19" fill="#444444"/>
+<rect x="78" y="1145" width="9" height="19" fill="#444444"/>
+<text x="78" y="1159" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="1145" width="18" height="19" fill="#444444"/>
+<rect x="105" y="1145" width="333" height="19" fill="#444444"/>
+<text x="105" y="1159" fill="#eeeeee" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="333" lengthAdjust="spacing">RECENT OUTPUT  ·  Review API response</text>
+<rect x="438" y="1145" width="603" height="19" fill="#444444"/>
+<rect x="1041" y="1145" width="126" height="19" fill="#444444"/>
+<text x="1041" y="1159" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="700" textLength="126" lengthAdjust="spacing">↗ RESUME AGENT</text>
+<rect x="1167" y="1145" width="63" height="19" fill="#444444"/>
+<rect x="78" y="1164" width="9" height="19" fill="#444444"/>
+<text x="78" y="1178" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="1164" width="18" height="19" fill="#444444"/>
+<rect x="105" y="1164" width="342" height="19" fill="#444444"/>
+<text x="105" y="1178" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="342" lengthAdjust="spacing">The API response has two valid shapes.</text>
+<rect x="447" y="1164" width="783" height="19" fill="#444444"/>
+<rect x="78" y="1183" width="9" height="19" fill="#444444"/>
+<text x="78" y="1197" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="1183" width="18" height="19" fill="#444444"/>
+<rect x="105" y="1183" width="441" height="19" fill="#444444"/>
+<text x="105" y="1197" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="441" lengthAdjust="spacing">Waiting for your choice: keep v1 or switch to v2.</text>
+<rect x="546" y="1183" width="684" height="19" fill="#444444"/>
+<rect x="78" y="1202" width="9" height="19" fill="#444444"/>
+<text x="78" y="1216" fill="#5fd7d7" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="9" lengthAdjust="spacing">▌</text>
+<rect x="87" y="1202" width="18" height="19" fill="#444444"/>
+<rect x="105" y="1202" width="360" height="19" fill="#444444"/>
+<text x="105" y="1216" fill="#d0d0d0" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="360" lengthAdjust="spacing">Resume this agent to answer in its pane.</text>
+<rect x="465" y="1202" width="765" height="19" fill="#444444"/>
+<text x="78" y="1254" fill="#ffd787" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="279" lengthAdjust="spacing">Demo data · no live Herdr state</text>
+<rect x="24" y="1259" width="1260" height="19" fill="#e6e6e6"/>
+<text x="24" y="1273" fill="#1f1f1f" font-family="JetBrains Mono, Menlo, monospace" font-size="15" font-weight="400" textLength="1260" lengthAdjust="spacing">  Click select · Double-click open · F Filter · P Pin · G Fold · N New · C Cleanup · D Close · X Remove · A Preview · V Resume · Q Quit     </text>
+</svg>
